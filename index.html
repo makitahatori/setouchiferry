@@ -33,6 +33,19 @@
     // --- 時刻表データ ---
     const FERRY_DATA = {
       "companies": {
+        "orange": {
+          "name": "オレンジフェリー",
+          "routes": {
+            "toyo_osaka": {
+              "outbound": { "from": "東予港", "to": "大阪南港", "schedule": [
+                {"time":"22:00", "arrivalTime":"06:00", "type":"フェリー", "fare":9050, "childFare":4530, "studentFare":7240, "note":"船内泊"}
+              ]},
+              "inbound": { "from": "大阪南港", "to": "東予港", "schedule": [
+                {"time":"22:00", "arrivalTime":"06:00", "type":"フェリー", "fare":9050, "childFare":4530, "studentFare":7240, "note":"船内泊"}
+              ]}
+            }
+          }
+        },
         "gogoshima": {
           "name": "興居島フェリー",
           "routes": {
@@ -278,7 +291,8 @@
     };
 
     const PREFECTURES = {
-      "愛媛県": ["高浜", "松山観光港", "三津浜", "八幡浜", "由良", "泊", "大浦", "神浦"],
+      "大阪府": ["大阪南港"],
+      "愛媛県": ["高浜", "松山観光港", "三津浜", "八幡浜", "東予港", "由良", "泊", "大浦", "神浦"],
       "広島県": ["広島", "呉"],
       "山口県": ["柳井"],
       "大分県": ["別府", "臼杵"]
@@ -332,8 +346,6 @@
         return Array.from(new Set(filteredByFrom.map(s => s.to))).sort();
       }, [filteredByFrom]);
 
-      // --- ソート処理の変更 ---
-      // 常に「現在時刻以降」の便をリストの先頭に、すでに過ぎた便をリストの後半に配置します。
       const finalSchedules = useMemo(() => {
         const sorted = filteredByFrom
           .filter(s => toPort === "すべて" || s.to === toPort)
@@ -345,10 +357,9 @@
         return [...upcoming, ...past];
       }, [filteredByFrom, toPort, currentTime]);
 
-      // 次の便の特定
       const nextShip = useMemo(() => {
         if (!currentTime || finalSchedules.length === 0) return null;
-        return finalSchedules[0]; // 上記でソート済みなので、常に配列の1番目が次の便になります
+        return finalSchedules[0];
       }, [finalSchedules, currentTime]);
 
       return (
