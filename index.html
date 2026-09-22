@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>瀬戸内・四国 航路ナビ</title>
-  <!-- React & Tailwind をブラウザで直接動かすための魔法のリンク -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -16,7 +15,7 @@
   <script type="text/babel">
     const { useState, useEffect, useMemo } = React;
 
-    // --- アイコン（Lucideの代わり） ---
+    // --- アイコン ---
     const Anchor = ({size=20}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>;
     const MapPin = ({size=14}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>;
     const Navigation = ({size=14}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>;
@@ -26,7 +25,13 @@
     const X = ({size=20}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
     const ArrowRightIcon = ({className=""}) => <svg width="16" height="16" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
 
-    // --- 時刻表データ（完全統合版） ---
+    // 寄港地の文字を整形するヘルパー関数
+    const formatViaText = (viaArray) => {
+      if (!viaArray) return null;
+      return viaArray.map(v => typeof v === 'string' ? v : v.port).join('・');
+    };
+
+    // --- 時刻表データ ---
     const FERRY_DATA = {
       "companies": {
         "gogoshima": {
@@ -47,41 +52,41 @@
           "routes": {
             "takahama_oura": {
               "outbound": { "from": "高浜", "to": "大浦", "schedule": [
-                {"time": "07:10", "arrivalTime": "08:15", "type": "フェリー", "via": ["睦月", "野忽那"], "fare": 930, "childFare": 470},
+                {"time": "07:10", "arrivalTime": "08:15", "type": "フェリー", "via": [{"port": "睦月", "time": "07:40"}, {"port": "野忽那", "time": "07:57"}], "fare": 930, "childFare": 470},
                 {"time": "13:15", "arrivalTime": "13:55", "type": "フェリー", "fare": 930, "childFare": 470},
-                {"time": "16:05", "arrivalTime": "17:10", "type": "フェリー", "via": ["睦月", "野忽那"], "fare": 930, "childFare": 470},
-                {"time": "17:25", "arrivalTime": "18:05", "type": "高速船", "via": ["睦月", "野忽那"], "fare": 1600, "childFare": 800},
-                {"time": "19:25", "arrivalTime": "19:56", "type": "高速船", "via": ["野忽那"], "fare": 1600, "childFare": 800}
+                {"time": "16:05", "arrivalTime": "17:10", "type": "フェリー", "via": [{"port": "睦月", "time": "16:35"}, {"port": "野忽那", "time": "16:52"}], "fare": 930, "childFare": 470},
+                {"time": "17:25", "arrivalTime": "18:05", "type": "高速船", "via": [{"port": "睦月", "time": "17:43"}, {"port": "野忽那", "time": "17:53"}], "fare": 1600, "childFare": 800},
+                {"time": "19:25", "arrivalTime": "19:56", "type": "高速船", "via": [{"port": "野忽那", "time": "19:44"}], "fare": 1600, "childFare": 800}
               ]},
               "inbound": { "from": "大浦", "to": "高浜", "schedule": [
-                {"time": "06:35", "arrivalTime": "07:15", "type": "高速船", "via": ["野忽那", "睦月"], "fare": 1600, "childFare": 800},
-                {"time": "08:35", "arrivalTime": "09:45", "type": "フェリー", "via": ["野忽那", "睦月"], "fare": 930, "childFare": 470},
+                {"time": "06:35", "arrivalTime": "07:15", "type": "高速船", "via": [{"port": "野忽那", "time": "06:48"}, {"port": "睦月", "time": "06:58"}], "fare": 1600, "childFare": 800},
+                {"time": "08:35", "arrivalTime": "09:45", "type": "フェリー", "via": [{"port": "野忽那", "time": "08:56"}, {"port": "睦月", "time": "09:13"}], "fare": 930, "childFare": 470},
                 {"time": "11:40", "arrivalTime": "12:21", "type": "フェリー", "fare": 930, "childFare": 470},
-                {"time": "14:10", "arrivalTime": "15:20", "type": "フェリー", "via": ["野忽那", "睦月"], "fare": 930, "childFare": 470},
-                {"time": "17:30", "arrivalTime": "18:40", "type": "フェリー", "via": ["野忽那", "睦月"], "fare": 930, "childFare": 470},
-                {"time": "18:45", "arrivalTime": "19:14", "type": "高速船", "via": ["睦月"], "fare": 1600, "childFare": 800}
+                {"time": "14:10", "arrivalTime": "15:20", "type": "フェリー", "via": [{"port": "野忽那", "time": "14:31"}, {"port": "睦月", "time": "14:48"}], "fare": 930, "childFare": 470},
+                {"time": "17:30", "arrivalTime": "18:40", "type": "フェリー", "via": [{"port": "野忽那", "time": "17:51"}, {"port": "睦月", "time": "18:08"}], "fare": 930, "childFare": 470},
+                {"time": "18:45", "arrivalTime": "19:14", "type": "高速船", "via": [{"port": "睦月", "time": "18:57"}], "fare": 1600, "childFare": 800}
               ]}
             },
             "mitsuhama_oura": {
               "outbound": { "from": "三津浜", "to": "大浦", "schedule": [
-                {"time": "06:55", "arrivalTime": "08:15", "type": "フェリー", "via": ["高浜", "睦月", "野忽那"], "fare": 930, "childFare": 470},
-                {"time": "10:10", "arrivalTime": "11:30", "type": "フェリー", "via": ["松山観光港", "睦月", "野忽那"], "fare": 930, "childFare": 470},
-                {"time": "13:00", "arrivalTime": "13:55", "type": "フェリー", "via": ["高浜"], "fare": 930, "childFare": 470},
-                {"time": "15:50", "arrivalTime": "17:10", "type": "フェリー", "via": ["高浜", "睦月", "野忽那"], "fare": 930, "childFare": 470},
-                {"time": "19:10", "arrivalTime": "20:14", "type": "フェリー", "via": ["松山観光港", "睦月"], "fare": 930, "childFare": 470}
+                {"time": "06:55", "arrivalTime": "08:15", "type": "フェリー", "via": [{"port": "高浜", "time": "07:10"}, {"port": "睦月", "time": "07:40"}, {"port": "野忽那", "time": "07:57"}], "fare": 930, "childFare": 470},
+                {"time": "10:10", "arrivalTime": "11:30", "type": "フェリー", "via": [{"port": "松山観光港", "time": "10:30"}, {"port": "睦月", "time": "10:55"}, {"port": "野忽那", "time": "11:12"}], "fare": 930, "childFare": 470},
+                {"time": "13:00", "arrivalTime": "13:55", "type": "フェリー", "via": [{"port": "高浜", "time": "13:15"}], "fare": 930, "childFare": 470},
+                {"time": "15:50", "arrivalTime": "17:10", "type": "フェリー", "via": [{"port": "高浜", "time": "16:05"}, {"port": "睦月", "time": "16:35"}, {"port": "野忽那", "time": "16:52"}], "fare": 930, "childFare": 470},
+                {"time": "19:10", "arrivalTime": "20:14", "type": "フェリー", "via": [{"port": "松山観光港", "time": "19:30"}, {"port": "睦月", "time": "19:55"}], "fare": 930, "childFare": 470}
               ]},
               "inbound": { "from": "大浦", "to": "三津浜", "schedule": [
-                {"time": "05:40", "arrivalTime": "06:40", "type": "フェリー", "via": ["睦月"], "fare": 930, "childFare": 470},
-                {"time": "08:35", "arrivalTime": "09:57", "type": "フェリー", "via": ["野忽那", "睦月", "高浜"], "fare": 930, "childFare": 470},
-                {"time": "11:40", "arrivalTime": "12:34", "type": "フェリー", "via": ["高浜"], "fare": 930, "childFare": 470},
-                {"time": "14:10", "arrivalTime": "15:32", "type": "フェリー", "via": ["野忽那", "睦月", "高浜"], "fare": 930, "childFare": 470},
-                {"time": "17:30", "arrivalTime": "18:55", "type": "フェリー", "via": ["野忽那", "睦月", "高浜"], "fare": 930, "childFare": 470}
+                {"time": "05:40", "arrivalTime": "06:40", "type": "フェリー", "via": [{"port": "睦月", "time": "05:59"}], "fare": 930, "childFare": 470},
+                {"time": "08:35", "arrivalTime": "09:57", "type": "フェリー", "via": [{"port": "野忽那", "time": "08:56"}, {"port": "睦月", "time": "09:13"}, {"port": "高浜", "time": "09:45"}], "fare": 930, "childFare": 470},
+                {"time": "11:40", "arrivalTime": "12:34", "type": "フェリー", "via": [{"port": "高浜", "time": "12:21"}], "fare": 930, "childFare": 470},
+                {"time": "14:10", "arrivalTime": "15:32", "type": "フェリー", "via": [{"port": "野忽那", "time": "14:31"}, {"port": "睦月", "time": "14:48"}, {"port": "高浜", "time": "15:20"}], "fare": 930, "childFare": 470},
+                {"time": "17:30", "arrivalTime": "18:55", "type": "フェリー", "via": [{"port": "野忽那", "time": "17:51"}, {"port": "睦月", "time": "18:08"}, {"port": "高浜", "time": "18:40"}], "fare": 930, "childFare": 470}
               ]}
             },
             "kankoko_oura": {
               "outbound": { "from": "松山観光港", "to": "大浦", "schedule": [
-                {"time": "10:30", "arrivalTime": "11:30", "type": "フェリー", "via": ["睦月", "野忽那"], "fare": 930, "childFare": 470},
-                {"time": "19:30", "arrivalTime": "20:14", "type": "フェリー", "via": ["睦月"], "fare": 930, "childFare": 470}
+                {"time": "10:30", "arrivalTime": "11:30", "type": "フェリー", "via": [{"port": "睦月", "time": "10:55"}, {"port": "野忽那", "time": "11:12"}], "fare": 930, "childFare": 470},
+                {"time": "19:30", "arrivalTime": "20:14", "type": "フェリー", "via": [{"port": "睦月", "time": "19:55"}], "fare": 930, "childFare": 470}
               ]},
               "inbound": { "from": "大浦", "to": "松山観光港", "schedule": [] }
             },
@@ -90,10 +95,10 @@
                 {"time": "07:40", "arrivalTime": "08:06", "type": "高速船", "fare": 1600, "childFare": 800},
                 {"time": "11:40", "arrivalTime": "12:06", "type": "高速船", "fare": 1600, "childFare": 800},
                 {"time": "15:15", "arrivalTime": "15:42", "type": "高速船", "fare": 1600, "childFare": 800},
-                {"time": "16:55", "arrivalTime": "17:47", "type": "フェリー", "via": ["釣島"], "fare": 930, "childFare": 470}
+                {"time": "16:55", "arrivalTime": "17:47", "type": "フェリー", "via": [{"port": "釣島", "time": "17:20"}], "fare": 930, "childFare": 470}
               ]},
               "inbound": { "from": "神浦", "to": "高浜", "schedule": [
-                {"time": "07:45", "arrivalTime": "08:38", "type": "フェリー", "via": ["釣島"], "fare": 930, "childFare": 470},
+                {"time": "07:45", "arrivalTime": "08:38", "type": "フェリー", "via": [{"port": "釣島", "time": "08:08"}], "fare": 930, "childFare": 470},
                 {"time": "09:11", "arrivalTime": "09:36", "type": "高速船", "fare": 1600, "childFare": 800},
                 {"time": "13:11", "arrivalTime": "13:36", "type": "高速船", "fare": 1600, "childFare": 800},
                 {"time": "16:47", "arrivalTime": "17:13", "type": "高速船", "fare": 1600, "childFare": 800}
@@ -101,12 +106,12 @@
             },
             "mitsuhama_kounoura": {
               "outbound": { "from": "三津浜", "to": "神浦", "schedule": [
-                {"time": "09:10", "arrivalTime": "10:02", "type": "フェリー", "via": ["釣島"], "fare": 930, "childFare": 470},
-                {"time": "16:40", "arrivalTime": "17:47", "type": "フェリー", "via": ["高浜", "釣島"], "fare": 930, "childFare": 470}
+                {"time": "09:10", "arrivalTime": "10:02", "type": "フェリー", "via": [{"port": "釣島", "time": "09:35"}], "fare": 930, "childFare": 470},
+                {"time": "16:40", "arrivalTime": "17:47", "type": "フェリー", "via": [{"port": "高浜", "time": "16:55"}, {"port": "釣島", "time": "17:20"}], "fare": 930, "childFare": 470}
               ]},
               "inbound": { "from": "神浦", "to": "三津浜", "schedule": [
-                {"time": "07:45", "arrivalTime": "08:50", "type": "フェリー", "via": ["釣島", "高浜"], "fare": 930, "childFare": 470},
-                {"time": "15:39", "arrivalTime": "16:25", "type": "フェリー", "via": ["釣島"], "fare": 930, "childFare": 470}
+                {"time": "07:45", "arrivalTime": "08:50", "type": "フェリー", "via": [{"port": "釣島", "time": "08:08"}, {"port": "高浜", "time": "08:38"}], "fare": 930, "childFare": 470},
+                {"time": "15:39", "arrivalTime": "16:25", "type": "フェリー", "via": [{"port": "釣島", "time": "16:02"}], "fare": 930, "childFare": 470}
               ]}
             }
           }
@@ -178,6 +183,7 @@
     };
 
     function FerryNavi() {
+      const [mounted, setMounted] = useState(false);
       const [pref, setPref] = useState("愛媛県");
       const [fromPort, setFromPort] = useState("すべて");
       const [toPort, setToPort] = useState("すべて");
@@ -187,6 +193,7 @@
       const allSchedules = useMemo(() => getAllSchedules(), []);
 
       useEffect(() => {
+        setMounted(true);
         const updateTime = () => {
           const now = new Date();
           setCurrentTime(now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0'));
@@ -232,7 +239,7 @@
               <Anchor size={20} />
               <h1 className="text-lg font-bold">瀬戸内・四国 航路ナビ</h1>
             </div>
-            <div className="text-sm font-medium bg-sky-800 px-3 py-1 rounded-full">{currentTime || "--:--"}</div>
+            <div className="text-sm font-medium bg-sky-800 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
           </header>
 
           {/* 検索パネル */}
@@ -294,7 +301,7 @@
               <div className="flex flex-wrap gap-2 text-xs font-medium relative z-10">
                 <span className="bg-sky-700/50 px-2 py-1 rounded">{nextShip.company}</span>
                 <span className="bg-white text-sky-900 px-2 py-1 rounded">{nextShip.type}</span>
-                {nextShip.via && <span className="bg-amber-500/20 text-amber-200 px-2 py-1 rounded border border-amber-500/30">{nextShip.via.join('・')}経由</span>}
+                {nextShip.via && <span className="bg-amber-500/20 text-amber-200 px-2 py-1 rounded border border-amber-500/30">{formatViaText(nextShip.via)}経由</span>}
                 {nextShip.note && <span className="bg-red-500 text-white px-2 py-1 rounded">{nextShip.note}</span>}
               </div>
             </div>
@@ -317,7 +324,7 @@
                       <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
                         <span className="font-medium text-sky-700">{schedule.company}</span>
                         <span className="px-1.5 py-0.5 bg-slate-100 rounded text-slate-600">{schedule.type}</span>
-                        {schedule.via && <span className="text-amber-600 font-medium">{schedule.via.join('・')}経由</span>}
+                        {schedule.via && <span className="text-amber-600 font-medium">{formatViaText(schedule.via)}経由</span>}
                         {schedule.note && <span className="text-red-500 font-bold bg-red-50 px-1 rounded">{schedule.note}</span>}
                       </div>
                     </div>
@@ -346,7 +353,7 @@
                 </div>
                 
                 <div className="p-5">
-                  <div className="flex items-center justify-between mb-6 pb-6 border-b border-slate-100">
+                  <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-100">
                     <div className="text-center">
                       <p className="text-xs font-bold text-slate-400 mb-1">出発</p>
                       <p className="text-3xl font-black text-slate-800">{selectedSchedule.time}</p>
@@ -358,19 +365,35 @@
                     </div>
                   </div>
 
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div className="flex justify-between items-center text-sm">
                       <span className="text-slate-500 font-medium">船種</span>
                       <span className="font-bold text-slate-800">{selectedSchedule.type}</span>
                     </div>
+
+                    {/* 寄港地の到着時間タイムライン表示 */}
                     {selectedSchedule.via && (
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-slate-500 font-medium">寄港地</span>
-                        <span className="font-bold text-amber-600">{selectedSchedule.via.join(' ➔ ')}</span>
+                      <div className="bg-amber-50 rounded-xl p-4 border border-amber-100 mt-2">
+                        <p className="text-xs font-bold text-amber-800 mb-2 border-b border-amber-200 pb-2 flex items-center gap-1">
+                          <Navigation size={12} /> 経由する港の到着予定
+                        </p>
+                        <div className="space-y-2">
+                          {selectedSchedule.via.map((v, i) => {
+                            const portName = typeof v === 'string' ? v : v.port;
+                            const portTime = typeof v === 'string' ? '--:--' : v.time;
+                            return (
+                              <div key={i} className="flex justify-between items-center text-sm">
+                                <span className="font-medium text-amber-700">{portName}</span>
+                                <span className="font-bold text-amber-900">{portTime}</span>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
+
                     {selectedSchedule.note && (
-                      <div className="flex justify-between items-center text-sm">
+                      <div className="flex justify-between items-center text-sm pt-2">
                         <span className="text-slate-500 font-medium">特記事項</span>
                         <span className="font-bold text-red-500 bg-red-50 px-2 py-1 rounded shadow-sm">{selectedSchedule.note}</span>
                       </div>
