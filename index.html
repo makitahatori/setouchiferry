@@ -180,19 +180,19 @@
           "routes": {
             "matsuyama_hiroshima": {
               "outbound": { "from": "松山観光港", "to": "広島", "schedule": [
-                {"time":"06:20", "type":"クルーズフェリー", "via":["呉"], "fare":4000},
-                {"time":"07:30", "type":"リニアジェット", "fare":7800},
-                {"time":"08:25", "type":"クルーズフェリー", "via":["呉"], "fare":4000}
+                {"time":"06:20", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000},
+                {"time":"07:30", "type":"リニアジェット", "fare":7800, "childFare":3900},
+                {"time":"08:25", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000}
               ]},
               "inbound": { "from": "広島", "to": "松山観光港", "schedule": [
-                {"time":"05:45", "type":"クルーズフェリー", "fare":4000},
-                {"time":"06:45", "type":"クルーズフェリー", "via":["呉"], "fare":4000}
+                {"time":"05:45", "type":"クルーズフェリー", "fare":4000, "childFare":2000},
+                {"time":"06:45", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000}
               ]}
             },
             "kure_matsuyama": {
               "outbound": { "from": "呉", "to": "松山観光港", "schedule": [
-                {"time":"07:30", "type":"クルーズフェリー", "fare":3000},
-                {"time":"09:30", "type":"リニアジェット", "fare":5800}
+                {"time":"07:30", "type":"クルーズフェリー", "fare":3000, "childFare":1500},
+                {"time":"09:30", "type":"リニアジェット", "fare":5800, "childFare":2900}
               ]},
               "inbound": { "from": "松山観光港", "to": "呉", "schedule": [] }
             }
@@ -203,30 +203,30 @@
           "routes": {
             "yanai": {
               "outbound": { "from": "三津浜", "to": "柳井", "schedule": [
-                {"time":"03:35", "arrivalTime":"06:00", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
-                {"time":"04:50", "arrivalTime":"07:25", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
-                {"time":"07:30", "arrivalTime":"10:05", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"09:40", "arrivalTime":"12:15", "type":"フェリー", "via":[{"port":"伊保田", "time":"10:47"}], "fare":5000, "childFare":4000},
-                {"time":"11:50", "arrivalTime":"14:25", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"13:35", "arrivalTime":"16:05", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"15:05", "arrivalTime":"17:40", "type":"フェリー", "via":[{"port":"伊保田", "time":"16:12"}], "fare":5000, "childFare":4000},
-                {"time":"17:35", "arrivalTime":"20:10", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"19:20", "arrivalTime":"21:55", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"20:30", "arrivalTime":"23:05", "type":"フェリー", "via":[{"port":"伊保田", "time":"21:37"}], "fare":5000, "childFare":4000},
-                {"time":"23:10", "arrivalTime":"01:45", "type":"フェリー", "fare":5000, "childFare":4000, "note":"土日運休"}
+                {"time":"03:35", "arrivalTime":"06:00", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"日月運休"},
+                {"time":"04:50", "arrivalTime":"07:25", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"日月運休"},
+                {"time":"07:30", "arrivalTime":"10:05", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"09:40", "arrivalTime":"12:15", "type":"フェリー", "via":[{"port":"伊保田", "time":"10:47"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"11:50", "arrivalTime":"14:25", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"13:35", "arrivalTime":"16:05", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"15:05", "arrivalTime":"17:40", "type":"フェリー", "via":[{"port":"伊保田", "time":"16:12"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"17:35", "arrivalTime":"20:10", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"19:20", "arrivalTime":"21:55", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"20:30", "arrivalTime":"23:05", "type":"フェリー", "via":[{"port":"伊保田", "time":"21:37"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"23:10", "arrivalTime":"01:45", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"土日運休"}
               ]},
               "inbound": { "from": "柳井", "to": "三津浜", "schedule": [
-                {"time":"01:00", "arrivalTime":"03:25", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
-                {"time":"02:00", "arrivalTime":"04:35", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
-                {"time":"07:00", "arrivalTime":"09:30", "type":"フェリー", "via":[{"port":"伊保田", "time":"08:10"}], "fare":5000, "childFare":4000},
-                {"time":"09:00", "arrivalTime":"11:35", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"10:50", "arrivalTime":"13:25", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"12:25", "arrivalTime":"14:55", "type":"フェリー", "via":[{"port":"伊保田", "time":"13:40"}], "fare":5000, "childFare":4000},
-                {"time":"14:45", "arrivalTime":"17:20", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"16:15", "arrivalTime":"18:40", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"17:50", "arrivalTime":"20:20", "type":"フェリー", "via":[{"port":"伊保田", "time":"19:05"}], "fare":5000, "childFare":4000},
-                {"time":"20:25", "arrivalTime":"23:00", "type":"フェリー", "fare":5000, "childFare":4000},
-                {"time":"22:10", "arrivalTime":"00:45", "type":"フェリー", "fare":5000, "childFare":4000, "note":"土日運休"}
+                {"time":"01:00", "arrivalTime":"03:25", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"日月運休"},
+                {"time":"02:00", "arrivalTime":"04:35", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"日月運休"},
+                {"time":"07:00", "arrivalTime":"09:30", "type":"フェリー", "via":[{"port":"伊保田", "time":"08:10"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"09:00", "arrivalTime":"11:35", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"10:50", "arrivalTime":"13:25", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"12:25", "arrivalTime":"14:55", "type":"フェリー", "via":[{"port":"伊保田", "time":"13:40"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"14:45", "arrivalTime":"17:20", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"16:15", "arrivalTime":"18:40", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"17:50", "arrivalTime":"20:20", "type":"フェリー", "via":[{"port":"伊保田", "time":"19:05"}], "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"20:25", "arrivalTime":"23:00", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000},
+                {"time":"22:10", "arrivalTime":"00:45", "type":"フェリー", "fare":5000, "childFare":2500, "studentFare":4000, "note":"土日運休"}
               ]}
             }
           }
@@ -236,40 +236,40 @@
           "routes": {
             "beppu": {
               "outbound": { "from": "八幡浜", "to": "別府", "schedule": [
-                {"time": "00:20", "arrivalTime": "03:10", "type": "フェリー", "fare": 4900},
-                {"time": "06:20", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900},
-                {"time": "10:15", "arrivalTime": "13:05", "type": "フェリー", "fare": 4900},
-                {"time": "13:00", "arrivalTime": "15:50", "type": "フェリー", "fare": 4900},
-                {"time": "17:25", "arrivalTime": "20:15", "type": "フェリー", "fare": 4900},
-                {"time": "20:30", "arrivalTime": "23:20", "type": "フェリー", "fare": 4900}
+                {"time": "00:20", "arrivalTime": "03:10", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "06:20", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "10:15", "arrivalTime": "13:05", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "13:00", "arrivalTime": "15:50", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "17:25", "arrivalTime": "20:15", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "20:30", "arrivalTime": "23:20", "type": "フェリー", "fare": 4900, "childFare": 2450}
               ]},
               "inbound": { "from": "別府", "to": "八幡浜", "schedule": [
-                {"time": "06:25", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900},
-                {"time": "09:45", "arrivalTime": "12:30", "type": "フェリー", "fare": 4900},
-                {"time": "14:00", "arrivalTime": "16:45", "type": "フェリー", "fare": 4900},
-                {"time": "16:45", "arrivalTime": "19:30", "type": "フェリー", "fare": 4900},
-                {"time": "20:50", "arrivalTime": "23:35", "type": "フェリー", "fare": 4900},
-                {"time": "23:50", "arrivalTime": "02:35", "type": "フェリー", "fare": 4900}
+                {"time": "06:25", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "09:45", "arrivalTime": "12:30", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "14:00", "arrivalTime": "16:45", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "16:45", "arrivalTime": "19:30", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "20:50", "arrivalTime": "23:35", "type": "フェリー", "fare": 4900, "childFare": 2450},
+                {"time": "23:50", "arrivalTime": "02:35", "type": "フェリー", "fare": 4900, "childFare": 2450}
               ]}
             },
             "usuki": {
               "outbound": { "from": "八幡浜", "to": "臼杵", "schedule": [
-                {"time": "05:50", "arrivalTime": "08:15", "type": "フェリー", "fare": 3800},
-                {"time": "09:40", "arrivalTime": "12:05", "type": "フェリー", "fare": 3800},
-                {"time": "11:45", "arrivalTime": "14:10", "type": "フェリー", "fare": 3800},
-                {"time": "15:35", "arrivalTime": "18:00", "type": "フェリー", "fare": 3800},
-                {"time": "17:40", "arrivalTime": "20:05", "type": "フェリー", "fare": 3800},
-                {"time": "22:00", "arrivalTime": "00:25", "type": "フェリー", "fare": 3800, "note": "土曜休航"},
-                {"time": "23:50", "arrivalTime": "02:15", "type": "フェリー", "fare": 3800}
+                {"time": "05:50", "arrivalTime": "08:15", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "09:40", "arrivalTime": "12:05", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "11:45", "arrivalTime": "14:10", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "15:35", "arrivalTime": "18:00", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "17:40", "arrivalTime": "20:05", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "22:00", "arrivalTime": "00:25", "type": "フェリー", "fare": 3800, "childFare": 1900, "note": "土曜休航"},
+                {"time": "23:50", "arrivalTime": "02:15", "type": "フェリー", "fare": 3800, "childFare": 1900}
               ]},
               "inbound": { "from": "臼杵", "to": "八幡浜", "schedule": [
-                {"time": "00:55", "arrivalTime": "03:15", "type": "フェリー", "fare": 3800, "note": "日曜休航"},
-                {"time": "02:40", "arrivalTime": "05:00", "type": "フェリー", "fare": 3800},
-                {"time": "08:50", "arrivalTime": "11:10", "type": "フェリー", "fare": 3800},
-                {"time": "12:40", "arrivalTime": "15:00", "type": "フェリー", "fare": 3800},
-                {"time": "14:40", "arrivalTime": "17:00", "type": "フェリー", "fare": 3800},
-                {"time": "18:30", "arrivalTime": "20:45", "type": "フェリー", "fare": 3800},
-                {"time": "20:40", "arrivalTime": "23:00", "type": "フェリー", "fare": 3800}
+                {"time": "00:55", "arrivalTime": "03:15", "type": "フェリー", "fare": 3800, "childFare": 1900, "note": "日曜休航"},
+                {"time": "02:40", "arrivalTime": "05:00", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "08:50", "arrivalTime": "11:10", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "12:40", "arrivalTime": "15:00", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "14:40", "arrivalTime": "17:00", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "18:30", "arrivalTime": "20:45", "type": "フェリー", "fare": 3800, "childFare": 1900},
+                {"time": "20:40", "arrivalTime": "23:00", "type": "フェリー", "fare": 3800, "childFare": 1900}
               ]}
             }
           }
@@ -332,16 +332,23 @@
         return Array.from(new Set(filteredByFrom.map(s => s.to))).sort();
       }, [filteredByFrom]);
 
+      // --- ソート処理の変更 ---
+      // 常に「現在時刻以降」の便をリストの先頭に、すでに過ぎた便をリストの後半に配置します。
       const finalSchedules = useMemo(() => {
-        return filteredByFrom
+        const sorted = filteredByFrom
           .filter(s => toPort === "すべて" || s.to === toPort)
           .sort((a, b) => a.time.localeCompare(b.time));
-      }, [filteredByFrom, toPort]);
+          
+        if (!currentTime) return sorted;
+        const upcoming = sorted.filter(s => s.time >= currentTime);
+        const past = sorted.filter(s => s.time < currentTime);
+        return [...upcoming, ...past];
+      }, [filteredByFrom, toPort, currentTime]);
 
+      // 次の便の特定
       const nextShip = useMemo(() => {
         if (!currentTime || finalSchedules.length === 0) return null;
-        const upcoming = finalSchedules.find(s => s.time >= currentTime);
-        return upcoming || finalSchedules[0];
+        return finalSchedules[0]; // 上記でソート済みなので、常に配列の1番目が次の便になります
       }, [finalSchedules, currentTime]);
 
       return (
@@ -399,9 +406,13 @@
             )}
           </div>
 
-          {/* メインビジュアル: 次の便 */}
+          {/* メインビジュアル: 次の便（クリック対応） */}
           {nextShip && (
-            <div className="m-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 p-6 text-white shadow-lg relative overflow-hidden">
+            <div 
+              onClick={() => setSelectedSchedule(nextShip)}
+              className="m-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 p-6 text-white shadow-lg relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:shadow-xl transition-all"
+              title="クリックして詳細を表示"
+            >
               <Ship className="absolute -right-4 -bottom-4 opacity-10 text-white" size={120} />
               <p className="text-cyan-50 text-sm font-medium mb-1">次に出発する船</p>
               <div className="flex items-end gap-3 mb-2 relative z-10">
@@ -514,13 +525,25 @@
                     
                     <div className="bg-slate-50 rounded-xl p-4 mt-2 border border-slate-100">
                       <p className="text-xs font-bold text-slate-400 mb-2 border-b border-slate-200 pb-2">片道 旅客運賃</p>
+                      
+                      {/* 大人運賃 */}
                       <div className="flex justify-between items-center mb-1">
                         <span className="text-sm font-bold text-slate-600">大人</span>
                         <span className="text-lg font-black text-slate-800">¥{selectedSchedule.fare?.toLocaleString()}</span>
                       </div>
+                      
+                      {/* 学割運賃 (データが存在する場合のみ表示) */}
+                      {selectedSchedule.studentFare && (
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-sm font-bold text-slate-600">学割</span>
+                          <span className="text-lg font-black text-slate-800">¥{selectedSchedule.studentFare.toLocaleString()}</span>
+                        </div>
+                      )}
+                      
+                      {/* 小児運賃 (データが存在する場合のみ表示) */}
                       {selectedSchedule.childFare && (
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-bold text-slate-600">小人・学割等</span>
+                          <span className="text-sm font-bold text-slate-600">小児</span>
                           <span className="text-lg font-black text-slate-800">¥{selectedSchedule.childFare.toLocaleString()}</span>
                         </div>
                       )}
