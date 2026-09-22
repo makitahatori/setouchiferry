@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-50">
+<body class="bg-slate-100">
   <div id="root"></div>
 
   <script type="text/babel">
@@ -25,7 +25,6 @@
     const X = ({size=20}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
     const ArrowRightIcon = ({className=""}) => <svg width="16" height="16" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
 
-    // 寄港地の文字を整形するヘルパー関数
     const formatViaText = (viaArray) => {
       if (!viaArray) return null;
       return viaArray.map(v => typeof v === 'string' ? v : v.port).join('・');
@@ -38,12 +37,72 @@
           "name": "興居島フェリー",
           "routes": {
             "yura": {
-              "outbound": { "from": "高浜", "to": "由良", "schedule": [{"time":"06:55", "type":"フェリー", "fare":300}, {"time":"08:15", "type":"フェリー", "fare":300}, {"time":"11:00", "type":"フェリー", "fare":300}, {"time":"15:00", "type":"フェリー", "fare":300}, {"time":"19:00", "type":"フェリー", "fare":300}] },
-              "inbound": { "from": "由良", "to": "高浜", "schedule": [{"time":"06:30", "type":"フェリー", "fare":300}, {"time":"07:35", "type":"フェリー", "fare":300}, {"time":"10:15", "type":"フェリー", "fare":300}, {"time":"14:15", "type":"フェリー", "fare":300}, {"time":"18:20", "type":"フェリー", "fare":300}] }
+              "outbound": { "from": "高浜", "to": "由良", "schedule": [
+                {"time":"06:15", "arrivalTime":"06:28", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:25", "arrivalTime":"07:38", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"08:08", "arrivalTime":"08:21", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"08:55", "arrivalTime":"09:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"09:55", "arrivalTime":"10:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"10:55", "arrivalTime":"11:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"11:55", "arrivalTime":"12:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"13:15", "arrivalTime":"13:28", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"14:40", "arrivalTime":"14:53", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"16:00", "arrivalTime":"16:13", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"17:10", "arrivalTime":"17:23", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"18:10", "arrivalTime":"18:23", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"19:10", "arrivalTime":"19:23", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"20:10", "arrivalTime":"20:23", "type":"フェリー", "fare":300, "childFare":150}
+              ]},
+              "inbound": { "from": "由良", "to": "高浜", "schedule": [
+                {"time":"05:55", "arrivalTime":"06:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:08", "arrivalTime":"07:21", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:44", "arrivalTime":"07:57", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"08:35", "arrivalTime":"08:48", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"09:35", "arrivalTime":"09:48", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"10:35", "arrivalTime":"10:48", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"11:35", "arrivalTime":"11:48", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"12:55", "arrivalTime":"13:08", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"14:20", "arrivalTime":"14:33", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"15:35", "arrivalTime":"15:48", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"16:40", "arrivalTime":"16:53", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"17:50", "arrivalTime":"18:03", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"18:50", "arrivalTime":"19:03", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"19:50", "arrivalTime":"20:03", "type":"フェリー", "fare":300, "childFare":150}
+              ]}
             },
             "tomari": {
-              "outbound": { "from": "高浜", "to": "泊", "schedule": [{"time":"06:25", "type":"フェリー", "fare":300}, {"time":"08:50", "type":"フェリー", "fare":300}, {"time":"11:40", "type":"フェリー", "fare":300}, {"time":"15:40", "type":"フェリー", "fare":300}, {"time":"19:50", "type":"フェリー", "fare":300}] },
-              "inbound": { "from": "泊", "to": "高浜", "schedule": [{"time":"06:00", "type":"フェリー", "fare":300}, {"time":"08:25", "type":"フェリー", "fare":300}, {"time":"11:15", "type":"フェリー", "fare":300}, {"time":"15:15", "type":"フェリー", "fare":300}, {"time":"19:20", "type":"フェリー", "fare":300}] }
+              "outbound": { "from": "高浜", "to": "泊", "schedule": [
+                {"time":"06:45", "arrivalTime":"06:55", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:17", "arrivalTime":"07:27", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:52", "arrivalTime":"08:02", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"09:25", "arrivalTime":"09:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"10:25", "arrivalTime":"10:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"11:25", "arrivalTime":"11:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"12:25", "arrivalTime":"12:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"13:55", "arrivalTime":"14:05", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"15:25", "arrivalTime":"15:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"16:40", "arrivalTime":"16:50", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"17:40", "arrivalTime":"17:50", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"18:40", "arrivalTime":"18:50", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"19:40", "arrivalTime":"19:50", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"20:25", "arrivalTime":"20:35", "type":"フェリー", "fare":300, "childFare":150}
+              ]},
+              "inbound": { "from": "泊", "to": "高浜", "schedule": [
+                {"time":"06:25", "arrivalTime":"06:35", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:00", "arrivalTime":"07:10", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"07:35", "arrivalTime":"07:45", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"08:55", "arrivalTime":"09:05", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"10:05", "arrivalTime":"10:15", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"11:05", "arrivalTime":"11:15", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"12:10", "arrivalTime":"12:20", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"13:35", "arrivalTime":"13:45", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"15:00", "arrivalTime":"15:10", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"16:10", "arrivalTime":"16:20", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"17:20", "arrivalTime":"17:30", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"18:20", "arrivalTime":"18:30", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"19:20", "arrivalTime":"19:30", "type":"フェリー", "fare":300, "childFare":150},
+                {"time":"20:10", "arrivalTime":"20:20", "type":"フェリー", "fare":300, "childFare":150}
+              ]}
             }
           }
         },
@@ -143,8 +202,32 @@
           "name": "防予フェリー",
           "routes": {
             "yanai": {
-              "outbound": { "from": "三津浜", "to": "柳井", "schedule": [{"time":"03:35", "type":"フェリー", "fare":5000}, {"time":"07:30", "type":"フェリー", "fare":5000}, {"time":"09:40", "type":"フェリー", "via":["伊保田"], "fare":5000}] },
-              "inbound": { "from": "柳井", "to": "三津浜", "schedule": [{"time":"01:00", "type":"フェリー", "fare":5000}, {"time":"07:00", "type":"フェリー", "via":["伊保田"], "fare":5000}] }
+              "outbound": { "from": "三津浜", "to": "柳井", "schedule": [
+                {"time":"03:35", "arrivalTime":"06:00", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
+                {"time":"04:50", "arrivalTime":"07:25", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
+                {"time":"07:30", "arrivalTime":"10:05", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"09:40", "arrivalTime":"12:15", "type":"フェリー", "via":[{"port":"伊保田", "time":"10:47"}], "fare":5000, "childFare":4000},
+                {"time":"11:50", "arrivalTime":"14:25", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"13:35", "arrivalTime":"16:05", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"15:05", "arrivalTime":"17:40", "type":"フェリー", "via":[{"port":"伊保田", "time":"16:12"}], "fare":5000, "childFare":4000},
+                {"time":"17:35", "arrivalTime":"20:10", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"19:20", "arrivalTime":"21:55", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"20:30", "arrivalTime":"23:05", "type":"フェリー", "via":[{"port":"伊保田", "time":"21:37"}], "fare":5000, "childFare":4000},
+                {"time":"23:10", "arrivalTime":"01:45", "type":"フェリー", "fare":5000, "childFare":4000, "note":"土日運休"}
+              ]},
+              "inbound": { "from": "柳井", "to": "三津浜", "schedule": [
+                {"time":"01:00", "arrivalTime":"03:25", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
+                {"time":"02:00", "arrivalTime":"04:35", "type":"フェリー", "fare":5000, "childFare":4000, "note":"日月運休"},
+                {"time":"07:00", "arrivalTime":"09:30", "type":"フェリー", "via":[{"port":"伊保田", "time":"08:10"}], "fare":5000, "childFare":4000},
+                {"time":"09:00", "arrivalTime":"11:35", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"10:50", "arrivalTime":"13:25", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"12:25", "arrivalTime":"14:55", "type":"フェリー", "via":[{"port":"伊保田", "time":"13:40"}], "fare":5000, "childFare":4000},
+                {"time":"14:45", "arrivalTime":"17:20", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"16:15", "arrivalTime":"18:40", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"17:50", "arrivalTime":"20:20", "type":"フェリー", "via":[{"port":"伊保田", "time":"19:05"}], "fare":5000, "childFare":4000},
+                {"time":"20:25", "arrivalTime":"23:00", "type":"フェリー", "fare":5000, "childFare":4000},
+                {"time":"22:10", "arrivalTime":"00:45", "type":"フェリー", "fare":5000, "childFare":4000, "note":"土日運休"}
+              ]}
             }
           }
         },
@@ -152,12 +235,42 @@
           "name": "宇和島運輸フェリー",
           "routes": {
             "beppu": {
-              "outbound": { "from": "八幡浜", "to": "別府", "schedule": [{"time": "00:20", "type": "フェリー", "fare": 4900}, {"time": "06:20", "type": "フェリー", "fare": 4900}, {"time": "10:15", "type": "フェリー", "fare": 4900}] },
-              "inbound": { "from": "別府", "to": "八幡浜", "schedule": [{"time": "06:25", "type": "フェリー", "fare": 4900}, {"time": "09:45", "type": "フェリー", "fare": 4900}] }
+              "outbound": { "from": "八幡浜", "to": "別府", "schedule": [
+                {"time": "00:20", "arrivalTime": "03:10", "type": "フェリー", "fare": 4900},
+                {"time": "06:20", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900},
+                {"time": "10:15", "arrivalTime": "13:05", "type": "フェリー", "fare": 4900},
+                {"time": "13:00", "arrivalTime": "15:50", "type": "フェリー", "fare": 4900},
+                {"time": "17:25", "arrivalTime": "20:15", "type": "フェリー", "fare": 4900},
+                {"time": "20:30", "arrivalTime": "23:20", "type": "フェリー", "fare": 4900}
+              ]},
+              "inbound": { "from": "別府", "to": "八幡浜", "schedule": [
+                {"time": "06:25", "arrivalTime": "09:10", "type": "フェリー", "fare": 4900},
+                {"time": "09:45", "arrivalTime": "12:30", "type": "フェリー", "fare": 4900},
+                {"time": "14:00", "arrivalTime": "16:45", "type": "フェリー", "fare": 4900},
+                {"time": "16:45", "arrivalTime": "19:30", "type": "フェリー", "fare": 4900},
+                {"time": "20:50", "arrivalTime": "23:35", "type": "フェリー", "fare": 4900},
+                {"time": "23:50", "arrivalTime": "02:35", "type": "フェリー", "fare": 4900}
+              ]}
             },
             "usuki": {
-              "outbound": { "from": "八幡浜", "to": "臼杵", "schedule": [{"time": "05:50", "type": "フェリー", "fare": 3800}, {"time": "22:00", "type": "フェリー", "fare": 3800, "note": "土曜休航"}] },
-              "inbound": { "from": "臼杵", "to": "八幡浜", "schedule": [{"time": "00:55", "type": "フェリー", "fare": 3800, "note": "日曜休航"}, {"time": "08:50", "type": "フェリー", "fare": 3800}] }
+              "outbound": { "from": "八幡浜", "to": "臼杵", "schedule": [
+                {"time": "05:50", "arrivalTime": "08:15", "type": "フェリー", "fare": 3800},
+                {"time": "09:40", "arrivalTime": "12:05", "type": "フェリー", "fare": 3800},
+                {"time": "11:45", "arrivalTime": "14:10", "type": "フェリー", "fare": 3800},
+                {"time": "15:35", "arrivalTime": "18:00", "type": "フェリー", "fare": 3800},
+                {"time": "17:40", "arrivalTime": "20:05", "type": "フェリー", "fare": 3800},
+                {"time": "22:00", "arrivalTime": "00:25", "type": "フェリー", "fare": 3800, "note": "土曜休航"},
+                {"time": "23:50", "arrivalTime": "02:15", "type": "フェリー", "fare": 3800}
+              ]},
+              "inbound": { "from": "臼杵", "to": "八幡浜", "schedule": [
+                {"time": "00:55", "arrivalTime": "03:15", "type": "フェリー", "fare": 3800, "note": "日曜休航"},
+                {"time": "02:40", "arrivalTime": "05:00", "type": "フェリー", "fare": 3800},
+                {"time": "08:50", "arrivalTime": "11:10", "type": "フェリー", "fare": 3800},
+                {"time": "12:40", "arrivalTime": "15:00", "type": "フェリー", "fare": 3800},
+                {"time": "14:40", "arrivalTime": "17:00", "type": "フェリー", "fare": 3800},
+                {"time": "18:30", "arrivalTime": "20:45", "type": "フェリー", "fare": 3800},
+                {"time": "20:40", "arrivalTime": "23:00", "type": "フェリー", "fare": 3800}
+              ]}
             }
           }
         }
@@ -232,25 +345,25 @@
       }, [finalSchedules, currentTime]);
 
       return (
-        <div className="min-h-screen text-slate-800 pb-20 font-sans max-w-lg mx-auto bg-slate-50 shadow-2xl relative">
+        <div className="min-h-screen text-slate-800 pb-20 font-sans max-w-lg mx-auto bg-white shadow-2xl relative">
           {/* Header */}
-          <header className="bg-sky-900 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
+          <header className="bg-blue-500 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Anchor size={20} />
               <h1 className="text-lg font-bold">瀬戸内・四国 航路ナビ</h1>
             </div>
-            <div className="text-sm font-medium bg-sky-800 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
+            <div className="text-sm font-medium bg-blue-600 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
           </header>
 
           {/* 検索パネル */}
           <div className="bg-white px-4 py-5 shadow-sm border-b border-slate-200 relative z-0">
             {/* 都道府県 */}
             <div className="mb-4">
-              <p className="mb-2 text-xs font-bold text-sky-800 flex items-center gap-1"><MapPin size={14}/> 出発エリア</p>
+              <p className="mb-2 text-xs font-bold text-blue-600 flex items-center gap-1"><MapPin size={14}/> 出発エリア</p>
               <div className="flex flex-wrap gap-2">
                 {Object.keys(PREFECTURES).map(p => (
                   <button key={p} onClick={() => { setPref(p); setFromPort("すべて"); setToPort("すべて"); }}
-                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${pref === p ? "bg-sky-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-sky-100"}`}>
+                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${pref === p ? "bg-blue-500 text-white" : "bg-slate-100 text-slate-600 hover:bg-blue-50"}`}>
                     {p}
                   </button>
                 ))}
@@ -259,11 +372,11 @@
 
             {/* 出発港 */}
             <div className="mb-4">
-              <p className="mb-2 text-xs font-bold text-sky-800">出発港</p>
+              <p className="mb-2 text-xs font-bold text-blue-600">出発港</p>
               <div className="flex flex-wrap gap-2">
                 {["すべて", ...PREFECTURES[pref]].map(port => (
                   <button key={port} onClick={() => handleFromPortChange(port)}
-                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${fromPort === port ? "bg-sky-600 text-white shadow-md shadow-sky-200" : "bg-white text-sky-700 ring-1 ring-sky-200 hover:bg-sky-50"}`}>
+                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${fromPort === port ? "bg-blue-500 text-white shadow-md shadow-blue-200" : "bg-white text-blue-600 ring-1 ring-blue-200 hover:bg-blue-50"}`}>
                     {port}
                   </button>
                 ))}
@@ -273,11 +386,11 @@
             {/* 到着港 */}
             {availableToPorts.length > 0 && (
               <div className="pt-2 border-t border-slate-100">
-                <p className="mb-2 text-xs font-bold text-teal-700 flex items-center gap-1"><Navigation size={14}/> 到着港</p>
+                <p className="mb-2 text-xs font-bold text-emerald-600 flex items-center gap-1"><Navigation size={14}/> 到着港</p>
                 <div className="flex flex-wrap gap-2">
                   {["すべて", ...availableToPorts].map(port => (
                     <button key={port} onClick={() => setToPort(port)}
-                      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${toPort === port ? "bg-teal-600 text-white shadow-md shadow-teal-200" : "bg-white text-teal-700 ring-1 ring-teal-200 hover:bg-teal-50"}`}>
+                      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${toPort === port ? "bg-emerald-500 text-white shadow-md shadow-emerald-200" : "bg-white text-emerald-600 ring-1 ring-emerald-200 hover:bg-emerald-50"}`}>
                       {port}
                     </button>
                   ))}
@@ -288,9 +401,9 @@
 
           {/* メインビジュアル: 次の便 */}
           {nextShip && (
-            <div className="m-4 rounded-2xl bg-gradient-to-br from-sky-800 to-blue-900 p-6 text-white shadow-lg relative overflow-hidden">
+            <div className="m-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 p-6 text-white shadow-lg relative overflow-hidden">
               <Ship className="absolute -right-4 -bottom-4 opacity-10 text-white" size={120} />
-              <p className="text-sky-200 text-sm font-medium mb-1">次に出発する船</p>
+              <p className="text-cyan-50 text-sm font-medium mb-1">次に出発する船</p>
               <div className="flex items-end gap-3 mb-2 relative z-10">
                 <span className="text-5xl font-black tracking-tight">{nextShip.time}</span>
                 <span className="text-lg font-medium mb-1 pb-1">発</span>
@@ -299,9 +412,9 @@
                 {nextShip.from} <ArrowRightIcon className="text-white" /> {nextShip.to}
               </div>
               <div className="flex flex-wrap gap-2 text-xs font-medium relative z-10">
-                <span className="bg-sky-700/50 px-2 py-1 rounded">{nextShip.company}</span>
-                <span className="bg-white text-sky-900 px-2 py-1 rounded">{nextShip.type}</span>
-                {nextShip.via && <span className="bg-amber-500/20 text-amber-200 px-2 py-1 rounded border border-amber-500/30">{formatViaText(nextShip.via)}経由</span>}
+                <span className="bg-blue-600/50 px-2 py-1 rounded">{nextShip.company}</span>
+                <span className="bg-white text-blue-700 px-2 py-1 rounded">{nextShip.type}</span>
+                {nextShip.via && <span className="bg-blue-600/50 text-blue-50 px-2 py-1 rounded border border-blue-400">{formatViaText(nextShip.via)}経由</span>}
                 {nextShip.note && <span className="bg-red-500 text-white px-2 py-1 rounded">{nextShip.note}</span>}
               </div>
             </div>
@@ -315,22 +428,22 @@
                 const isPast = schedule.time < currentTime;
                 return (
                   <div key={idx} onClick={() => setSelectedSchedule(schedule)}
-                    className={`bg-white rounded-xl p-4 shadow-sm border border-slate-200 cursor-pointer transition-all hover:border-sky-300 hover:shadow-md flex justify-between items-center ${isPast ? "opacity-50 grayscale" : ""}`}>
+                    className={`bg-white rounded-xl p-4 shadow-sm border border-slate-200 cursor-pointer transition-all hover:border-blue-300 hover:shadow-md flex justify-between items-center ${isPast ? "opacity-50 grayscale" : ""}`}>
                     <div>
                       <div className="flex items-center gap-3 mb-1">
                         <span className="text-2xl font-bold text-slate-800">{schedule.time}</span>
                         <span className="text-sm font-bold text-slate-600">{schedule.from} → {schedule.to}</span>
                       </div>
                       <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                        <span className="font-medium text-sky-700">{schedule.company}</span>
+                        <span className="font-medium text-blue-600">{schedule.company}</span>
                         <span className="px-1.5 py-0.5 bg-slate-100 rounded text-slate-600">{schedule.type}</span>
-                        {schedule.via && <span className="text-amber-600 font-medium">{formatViaText(schedule.via)}経由</span>}
+                        {schedule.via && <span className="text-slate-500 font-medium">{formatViaText(schedule.via)}経由</span>}
                         {schedule.note && <span className="text-red-500 font-bold bg-red-50 px-1 rounded">{schedule.note}</span>}
                       </div>
                     </div>
                     <div className="text-right shrink-0 ml-2">
                       <div className="text-sm font-bold text-slate-700">¥{schedule.fare?.toLocaleString()}</div>
-                      <div className="text-xs text-sky-500 flex items-center gap-1 justify-end mt-1">詳細 <Info size={12}/></div>
+                      <div className="text-xs text-blue-500 flex items-center gap-1 justify-end mt-1">詳細 <Info size={12}/></div>
                     </div>
                   </div>
                 );
@@ -344,12 +457,12 @@
           {selectedSchedule && (
             <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setSelectedSchedule(null)}>
               <div className="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-                <div className="bg-sky-900 p-4 flex justify-between items-start text-white">
+                <div className="bg-blue-500 p-4 flex justify-between items-start text-white">
                   <div>
-                    <span className="bg-sky-800 text-xs font-bold px-2 py-1 rounded mb-2 inline-block shadow-sm">{selectedSchedule.company}</span>
+                    <span className="bg-blue-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block shadow-sm">{selectedSchedule.company}</span>
                     <h3 className="text-xl font-bold">{selectedSchedule.from} → {selectedSchedule.to}</h3>
                   </div>
-                  <button onClick={() => setSelectedSchedule(null)} className="p-1 hover:bg-sky-800 rounded-full transition-colors"><X size={20} /></button>
+                  <button onClick={() => setSelectedSchedule(null)} className="p-1 hover:bg-blue-600 rounded-full transition-colors"><X size={20} /></button>
                 </div>
                 
                 <div className="p-5">
@@ -373,8 +486,8 @@
 
                     {/* 寄港地の到着時間タイムライン表示 */}
                     {selectedSchedule.via && (
-                      <div className="bg-amber-50 rounded-xl p-4 border border-amber-100 mt-2">
-                        <p className="text-xs font-bold text-amber-800 mb-2 border-b border-amber-200 pb-2 flex items-center gap-1">
+                      <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 mt-2">
+                        <p className="text-xs font-bold text-slate-500 mb-2 border-b border-slate-200 pb-2 flex items-center gap-1">
                           <Navigation size={12} /> 経由する港の到着予定
                         </p>
                         <div className="space-y-2">
@@ -383,8 +496,8 @@
                             const portTime = typeof v === 'string' ? '--:--' : v.time;
                             return (
                               <div key={i} className="flex justify-between items-center text-sm">
-                                <span className="font-medium text-amber-700">{portName}</span>
-                                <span className="font-bold text-amber-900">{portTime}</span>
+                                <span className="font-medium text-slate-600">{portName}</span>
+                                <span className="font-bold text-slate-800">{portTime}</span>
                               </div>
                             );
                           })}
@@ -407,7 +520,7 @@
                       </div>
                       {selectedSchedule.childFare && (
                         <div className="flex justify-between items-center">
-                          <span className="text-sm font-bold text-slate-600">小人</span>
+                          <span className="text-sm font-bold text-slate-600">小人・学割等</span>
                           <span className="text-lg font-black text-slate-800">¥{selectedSchedule.childFare.toLocaleString()}</span>
                         </div>
                       )}
@@ -415,7 +528,7 @@
                   </div>
                 </div>
                 <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
-                  <button onClick={() => setSelectedSchedule(null)} className="w-full bg-sky-900 text-white font-bold py-3 rounded-xl shadow-md hover:bg-sky-800 transition-colors">
+                  <button onClick={() => setSelectedSchedule(null)} className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl shadow-md hover:bg-blue-600 transition-colors">
                     閉じる
                   </button>
                 </div>
