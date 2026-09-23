@@ -9,7 +9,7 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-100">
+<body class="bg-slate-50">
   <div id="root"></div>
 
   <script type="text/babel">
@@ -550,18 +550,18 @@
       }, [finalSchedules, currentTime]);
 
       return (
-        <div className="min-h-screen text-slate-800 pb-20 font-sans max-w-lg mx-auto bg-white shadow-2xl relative">
+        <div className="min-h-screen text-slate-800 pb-20 font-sans max-w-lg mx-auto bg-slate-50 shadow-2xl relative">
           {/* Header */}
-          <header className="bg-blue-500 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
+          <header className="bg-sky-900 text-white p-4 shadow-md sticky top-0 z-10 flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Anchor size={20} />
               <h1 className="text-lg font-bold">瀬戸内・四国 航路ナビ</h1>
             </div>
-            <div className="text-sm font-medium bg-blue-600 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
+            <div className="text-sm font-medium bg-sky-800 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
           </header>
 
           {/* 今日のダイヤ案内 */}
-          <div className="bg-blue-50 border-b border-blue-100 px-4 py-2 text-xs font-medium text-blue-800 flex justify-between">
+          <div className="bg-sky-50 border-b border-sky-100 px-4 py-2 text-xs font-medium text-sky-800 flex justify-between">
             <span>本日は <strong>{isHoliday ? "土休日ダイヤ" : "平日ダイヤ"}</strong> で表示しています</span>
             <span>{dateObj.getMonth() + 1}月{dateObj.getDate()}日</span>
           </div>
@@ -570,11 +570,11 @@
           <div className="bg-white px-4 py-5 shadow-sm border-b border-slate-200 relative z-0">
             {/* 都道府県 */}
             <div className="mb-4">
-              <p className="mb-2 text-xs font-bold text-blue-600 flex items-center gap-1"><MapPin size={14}/> 出発エリア</p>
+              <p className="mb-2 text-xs font-bold text-sky-800 flex items-center gap-1"><MapPin size={14}/> 出発エリア</p>
               <div className="flex flex-wrap gap-2">
                 {Object.keys(PREFECTURES).map(p => (
                   <button key={p} onClick={() => { setPref(p); setFromPort("すべて"); setToPort("すべて"); }}
-                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${pref === p ? "bg-blue-500 text-white" : "bg-slate-100 text-slate-600 hover:bg-blue-50"}`}>
+                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${pref === p ? "bg-sky-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-sky-100"}`}>
                     {p}
                   </button>
                 ))}
@@ -583,11 +583,11 @@
 
             {/* 出発港 */}
             <div className="mb-4">
-              <p className="mb-2 text-xs font-bold text-blue-600">出発港</p>
+              <p className="mb-2 text-xs font-bold text-sky-800">出発港</p>
               <div className="flex flex-wrap gap-2">
                 {["すべて", ...PREFECTURES[pref]].map(port => (
                   <button key={port} onClick={() => handleFromPortChange(port)}
-                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${fromPort === port ? "bg-blue-500 text-white shadow-md shadow-blue-200" : "bg-white text-blue-600 ring-1 ring-blue-200 hover:bg-blue-50"}`}>
+                    className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${fromPort === port ? "bg-sky-600 text-white shadow-md shadow-sky-200" : "bg-white text-sky-700 ring-1 ring-sky-200 hover:bg-sky-50"}`}>
                     {port}
                   </button>
                 ))}
@@ -597,11 +597,11 @@
             {/* 到着港 */}
             {availableToPorts.length > 0 && (
               <div className="pt-2 border-t border-slate-100">
-                <p className="mb-2 text-xs font-bold text-emerald-600 flex items-center gap-1"><Navigation size={14}/> 到着港</p>
+                <p className="mb-2 text-xs font-bold text-teal-700 flex items-center gap-1"><Navigation size={14}/> 到着港</p>
                 <div className="flex flex-wrap gap-2">
                   {["すべて", ...availableToPorts].map(port => (
                     <button key={port} onClick={() => setToPort(port)}
-                      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${toPort === port ? "bg-emerald-500 text-white shadow-md shadow-emerald-200" : "bg-white text-emerald-600 ring-1 ring-emerald-200 hover:bg-emerald-50"}`}>
+                      className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all ${toPort === port ? "bg-teal-600 text-white shadow-md shadow-teal-200" : "bg-white text-teal-700 ring-1 ring-teal-200 hover:bg-teal-50"}`}>
                       {port}
                     </button>
                   ))}
@@ -614,11 +614,11 @@
           {nextShip && (
             <div 
               onClick={() => setSelectedSchedule(nextShip)}
-              className="m-4 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-400 p-6 text-white shadow-lg relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:shadow-xl transition-all"
+              className="m-4 rounded-2xl bg-gradient-to-br from-sky-800 to-blue-900 p-6 text-white shadow-lg relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:shadow-xl transition-all"
               title="クリックして詳細を表示"
             >
               <Ship className="absolute -right-4 -bottom-4 opacity-10 text-white" size={120} />
-              <p className="text-cyan-50 text-sm font-medium mb-1">次に出発する船</p>
+              <p className="text-sky-200 text-sm font-medium mb-1">次に出発する船</p>
               <div className="flex items-end gap-3 mb-2 relative z-10">
                 <span className="text-5xl font-black tracking-tight">{nextShip.time}</span>
                 <span className="text-lg font-medium mb-1 pb-1">発</span>
@@ -627,9 +627,9 @@
                 {nextShip.from} <ArrowRightIcon className="text-white" /> {nextShip.to}
               </div>
               <div className="flex flex-wrap gap-2 text-xs font-medium relative z-10">
-                <span className="bg-blue-600/50 px-2 py-1 rounded">{nextShip.company}</span>
-                <span className="bg-white text-blue-700 px-2 py-1 rounded">{nextShip.type}</span>
-                {nextShip.via && <span className="bg-blue-600/50 text-blue-50 px-2 py-1 rounded border border-blue-400">{formatViaText(nextShip.via)}経由</span>}
+                <span className="bg-sky-700/50 px-2 py-1 rounded">{nextShip.company}</span>
+                <span className="bg-white text-sky-900 px-2 py-1 rounded">{nextShip.type}</span>
+                {nextShip.via && <span className="bg-sky-700/50 text-sky-100 px-2 py-1 rounded border border-sky-600">{formatViaText(nextShip.via)}経由</span>}
                 {nextShip.note && <span className="bg-red-500 text-white px-2 py-1 rounded">{nextShip.note}</span>}
               </div>
             </div>
@@ -643,14 +643,14 @@
                 const isPast = schedule.time < currentTime;
                 return (
                   <div key={idx} onClick={() => setSelectedSchedule(schedule)}
-                    className={`bg-white rounded-xl p-4 shadow-sm border border-slate-200 cursor-pointer transition-all hover:border-blue-300 hover:shadow-md flex justify-between items-center ${isPast ? "opacity-50 grayscale" : ""}`}>
+                    className={`bg-white rounded-xl p-4 shadow-sm border border-slate-200 cursor-pointer transition-all hover:border-sky-300 hover:shadow-md flex justify-between items-center ${isPast ? "opacity-50 grayscale" : ""}`}>
                     <div>
                       <div className="flex items-center gap-3 mb-1">
                         <span className="text-2xl font-bold text-slate-800">{schedule.time}</span>
                         <span className="text-sm font-bold text-slate-600">{schedule.from} → {schedule.to}</span>
                       </div>
                       <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-                        <span className="font-medium text-blue-600">{schedule.company}</span>
+                        <span className="font-medium text-sky-700">{schedule.company}</span>
                         <span className="px-1.5 py-0.5 bg-slate-100 rounded text-slate-600">{schedule.type}</span>
                         {schedule.via && <span className="text-slate-500 font-medium">{formatViaText(schedule.via)}経由</span>}
                         {schedule.note && <span className="text-red-500 font-bold bg-red-50 px-1 rounded">{schedule.note}</span>}
@@ -660,7 +660,7 @@
                       <div className="text-sm font-bold text-slate-700">
                         {schedule.fare ? `¥${schedule.fare.toLocaleString()}` : '詳細を確認'}
                       </div>
-                      <div className="text-xs text-blue-500 flex items-center gap-1 justify-end mt-1">詳細 <Info size={12}/></div>
+                      <div className="text-xs text-sky-500 flex items-center gap-1 justify-end mt-1">詳細 <Info size={12}/></div>
                     </div>
                   </div>
                 );
@@ -674,12 +674,12 @@
           {selectedSchedule && (
             <div className="fixed inset-0 bg-slate-900/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setSelectedSchedule(null)}>
               <div className="bg-white rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-                <div className="bg-blue-500 p-4 flex justify-between items-start text-white">
+                <div className="bg-sky-900 p-4 flex justify-between items-start text-white">
                   <div>
-                    <span className="bg-blue-600 text-xs font-bold px-2 py-1 rounded mb-2 inline-block shadow-sm">{selectedSchedule.company}</span>
+                    <span className="bg-sky-800 text-xs font-bold px-2 py-1 rounded mb-2 inline-block shadow-sm">{selectedSchedule.company}</span>
                     <h3 className="text-xl font-bold">{selectedSchedule.from} → {selectedSchedule.to}</h3>
                   </div>
-                  <button onClick={() => setSelectedSchedule(null)} className="p-1 hover:bg-blue-600 rounded-full transition-colors"><X size={20} /></button>
+                  <button onClick={() => setSelectedSchedule(null)} className="p-1 hover:bg-sky-800 rounded-full transition-colors"><X size={20} /></button>
                 </div>
                 
                 <div className="p-5">
@@ -758,7 +758,7 @@
                   </div>
                 </div>
                 <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
-                  <button onClick={() => setSelectedSchedule(null)} className="w-full bg-blue-500 text-white font-bold py-3 rounded-xl shadow-md hover:bg-blue-600 transition-colors">
+                  <button onClick={() => setSelectedSchedule(null)} className="w-full bg-sky-900 text-white font-bold py-3 rounded-xl shadow-md hover:bg-sky-800 transition-colors">
                     閉じる
                   </button>
                 </div>
