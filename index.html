@@ -30,9 +30,50 @@
       return viaArray.map(v => typeof v === 'string' ? v : v.port).join('・');
     };
 
+    // --- 日付・祝日判定 ---
+    const getTodayInfo = () => {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, '0');
+      const dd = String(today.getDate()).padStart(2, '0');
+      const dateStr = `${yyyy}-${mm}-${dd}`;
+      
+      // 2026年9月等の連休・祝日リスト
+      const holidays = ['2026-09-21', '2026-09-22', '2026-09-23'];
+      const isWeekend = today.getDay() === 0 || today.getDay() === 6;
+      const isHoliday = isWeekend || holidays.includes(dateStr);
+      
+      return { isHoliday, dateObj: today };
+    };
+
     // --- 時刻表データ ---
     const FERRY_DATA = {
       "companies": {
+        "jumbo": {
+          "name": "ジャンボフェリー",
+          "routes": {
+            "kobe_takamatsu": {
+              "outbound": { "from": "神戸", "to": "高松", "schedule": [
+                {"time":"01:00", "arrivalTime":"05:15", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"both"},
+                {"time":"06:00", "arrivalTime":"10:45", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday", "via":["小豆島"]},
+                {"time":"13:30", "arrivalTime":"18:15", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday", "via":["小豆島"]},
+                {"time":"19:45", "arrivalTime":"24:00", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday"},
+                {"time":"08:30", "arrivalTime":"13:10", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday", "via":["小豆島"]},
+                {"time":"11:20", "arrivalTime":"16:05", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday", "via":["小豆島"]},
+                {"time":"19:20", "arrivalTime":"24:05", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday"}
+              ]},
+              "inbound": { "from": "高松", "to": "神戸", "schedule": [
+                {"time":"01:00", "arrivalTime":"05:15", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"both"},
+                {"time":"06:15", "arrivalTime":"11:00", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday"},
+                {"time":"14:00", "arrivalTime":"18:45", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday", "via":["小豆島"]},
+                {"time":"19:15", "arrivalTime":"24:00", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"weekday", "via":["小豆島"]},
+                {"time":"06:00", "arrivalTime":"10:40", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday"},
+                {"time":"14:00", "arrivalTime":"18:40", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday", "via":["小豆島"]},
+                {"time":"16:30", "arrivalTime":"21:00", "type":"フェリー", "baseFare":1990, "baseChildFare":1000, "baseStudentFare":1890, "dayType":"holiday", "via":["小豆島"]}
+              ]}
+            }
+          }
+        },
         "orange": {
           "name": "オレンジフェリー",
           "routes": {
@@ -375,19 +416,77 @@
     };
 
     const PREFECTURES = {
+      "兵庫県": ["神戸"],
       "大阪府": ["大阪南港"],
+      "香川県": ["高松"],
       "愛媛県": ["高浜", "松山観光港", "三津浜", "八幡浜", "東予港", "由良", "泊", "大浦", "神浦"],
       "広島県": ["広島", "呉"],
       "山口県": ["柳井"],
       "大分県": ["別府", "臼杵"]
     };
 
-    const getAllSchedules = () => {
+    // --- 日付や祝日に応じて全ての便をフラット化して抽出 ---
+    const getAllSchedules = (isHoliday, dateObj) => {
       const all = [];
       Object.values(FERRY_DATA.companies).forEach(company => {
         Object.values(company.routes).forEach(route => {
-          route.outbound?.schedule.forEach(s => all.push({ ...s, company: company.name, from: route.outbound.from, to: route.outbound.to }));
-          route.inbound?.schedule.forEach(s => all.push({ ...s, company: company.name, from: route.inbound.from, to: route.inbound.to }));
+          
+          const processSchedule = (sArray, fromPort, toPort) => {
+            if (!sArray) return;
+            sArray.forEach(s => {
+              
+              // 平日・土休日による便のフィルタリング
+              if (s.dayType) {
+                if (isHoliday && s.dayType === "weekday") return;
+                if (!isHoliday && s.dayType === "holiday") return;
+              }
+              
+              let finalFare = s.fare || s.baseFare;
+              let finalChild = s.childFare || s.baseChildFare;
+              let finalStudent = s.studentFare || s.baseStudentFare;
+              let noteObj = s.note;
+
+              // ジャンボフェリー独自の加算ルール適用
+              if (company.name === "ジャンボフェリー") {
+                let addAdult = 0;
+                let addChild = 0;
+                
+                if (isHoliday) {
+                  addAdult += 340;
+                  addChild += 170;
+                }
+                
+                // 深夜便加算 (9月末まで 00:00〜04:00発)
+                const h = parseInt(s.time.split(':')[0], 10);
+                const isMidnight = h >= 0 && h <= 4;
+                const isBeforeOct = dateObj.getMonth() < 9;
+                
+                if (isMidnight && isBeforeOct) {
+                  addAdult += 340;
+                  addChild += 170;
+                  noteObj = (noteObj ? noteObj + " / " : "") + "深夜料金加算済";
+                }
+
+                if (finalFare) finalFare += addAdult;
+                if (finalChild) finalChild += addChild;
+                if (finalStudent) finalStudent += addAdult;
+              }
+
+              all.push({ 
+                ...s, 
+                company: company.name, 
+                from: fromPort, 
+                to: toPort,
+                fare: finalFare,
+                childFare: finalChild,
+                studentFare: finalStudent,
+                note: noteObj
+              });
+            });
+          };
+
+          processSchedule(route.outbound?.schedule, route.outbound?.from, route.outbound?.to);
+          processSchedule(route.inbound?.schedule, route.inbound?.from, route.inbound?.to);
         });
       });
       return all;
@@ -395,13 +494,17 @@
 
     function FerryNavi() {
       const [mounted, setMounted] = useState(false);
-      const [pref, setPref] = useState("愛媛県");
-      const [fromPort, setFromPort] = useState("すべて");
+      const [pref, setPref] = useState("兵庫県");
+      const [fromPort, setFromPort] = useState("神戸");
       const [toPort, setToPort] = useState("すべて");
       const [currentTime, setCurrentTime] = useState("");
       const [selectedSchedule, setSelectedSchedule] = useState(null);
 
-      const allSchedules = useMemo(() => getAllSchedules(), []);
+      // 今日の日付に基づいた情報を取得
+      const { isHoliday, dateObj } = useMemo(() => getTodayInfo(), []);
+
+      // 祝日・平日の判定に合わせた全便リストを生成
+      const allSchedules = useMemo(() => getAllSchedules(isHoliday, dateObj), [isHoliday, dateObj]);
 
       useEffect(() => {
         setMounted(true);
@@ -456,6 +559,12 @@
             </div>
             <div className="text-sm font-medium bg-blue-600 px-3 py-1 rounded-full">{mounted ? currentTime : "--:--"}</div>
           </header>
+
+          {/* 今日のダイヤ案内 */}
+          <div className="bg-blue-50 border-b border-blue-100 px-4 py-2 text-xs font-medium text-blue-800 flex justify-between">
+            <span>本日は <strong>{isHoliday ? "土休日ダイヤ" : "平日ダイヤ"}</strong> で表示しています</span>
+            <span>{dateObj.getMonth() + 1}月{dateObj.getDate()}日</span>
+          </div>
 
           {/* 検索パネル */}
           <div className="bg-white px-4 py-5 shadow-sm border-b border-slate-200 relative z-0">
