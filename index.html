@@ -193,21 +193,105 @@
           "routes": {
             "matsuyama_hiroshima": {
               "outbound": { "from": "松山観光港", "to": "広島", "schedule": [
-                {"time":"06:20", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000},
-                {"time":"07:30", "type":"リニアジェット", "fare":7800, "childFare":3900},
-                {"time":"08:25", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000}
+                {"time":"06:20", "arrivalTime":"09:02", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"08:17"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"07:30", "arrivalTime":"08:50", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"08:25", "arrivalTime":"11:07", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"10:22"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"09:05", "arrivalTime":"10:35", "type":"リニアジェット", "via":[{"port":"呉", "time":"10:10"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"09:40", "arrivalTime":"12:22", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"11:37"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"10:50", "arrivalTime":"12:10", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"11:00", "arrivalTime":"13:27", "type":"クルーズフェリー", "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"12:10", "arrivalTime":"14:52", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"14:07"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"12:25", "arrivalTime":"13:55", "type":"リニアジェット", "via":[{"port":"呉", "time":"13:30"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"14:15", "arrivalTime":"16:57", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"16:12"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"15:15", "arrivalTime":"16:35", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"15:30", "arrivalTime":"18:12", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"17:27"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"16:35", "arrivalTime":"19:17", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"18:32"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"16:45", "arrivalTime":"18:15", "type":"リニアジェット", "via":[{"port":"呉", "time":"17:50"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"18:00", "arrivalTime":"20:42", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"19:57"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"18:30", "arrivalTime":"19:50", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"20:00", "arrivalTime":"21:20", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"20:10", "arrivalTime":"22:52", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"22:07"}], "fare":4000, "childFare":2000, "studentFare":3200}
               ]},
               "inbound": { "from": "広島", "to": "松山観光港", "schedule": [
-                {"time":"05:45", "type":"クルーズフェリー", "fare":4000, "childFare":2000},
-                {"time":"06:45", "type":"クルーズフェリー", "via":["呉"], "fare":4000, "childFare":2000}
+                {"time":"05:45", "arrivalTime":"08:12", "type":"クルーズフェリー", "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"06:45", "arrivalTime":"09:27", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"07:30"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"07:30", "arrivalTime":"08:50", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"08:05", "arrivalTime":"10:47", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"08:50"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"09:05", "arrivalTime":"10:35", "type":"リニアジェット", "via":[{"port":"呉", "time":"09:30"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"09:15", "arrivalTime":"11:57", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"10:00"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"10:50", "arrivalTime":"12:10", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"11:20", "arrivalTime":"14:02", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"12:05"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"12:25", "arrivalTime":"13:55", "type":"リニアジェット", "via":[{"port":"呉", "time":"12:50"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"12:35", "arrivalTime":"15:17", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"13:20"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"13:40", "arrivalTime":"16:22", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"14:25"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"15:05", "arrivalTime":"17:47", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"15:50"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"15:15", "arrivalTime":"16:35", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"16:45", "arrivalTime":"18:15", "type":"リニアジェット", "via":[{"port":"呉", "time":"17:10"}], "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"17:15", "arrivalTime":"19:57", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"18:00"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"18:30", "arrivalTime":"19:50", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240},
+                {"time":"19:30", "arrivalTime":"22:12", "type":"クルーズフェリー", "via":[{"port":"呉", "time":"20:15"}], "fare":4000, "childFare":2000, "studentFare":3200},
+                {"time":"20:00", "arrivalTime":"21:20", "type":"リニアジェット", "fare":7800, "childFare":3900, "studentFare":6240}
               ]}
             },
-            "kure_matsuyama": {
-              "outbound": { "from": "呉", "to": "松山観光港", "schedule": [
-                {"time":"07:30", "type":"クルーズフェリー", "fare":3000, "childFare":1500},
-                {"time":"09:30", "type":"リニアジェット", "fare":5800, "childFare":2900}
+            "matsuyama_kure": {
+              "outbound": { "from": "松山観光港", "to": "呉", "schedule": [
+                {"time":"06:20", "arrivalTime":"08:17", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"08:25", "arrivalTime":"10:22", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"09:05", "arrivalTime":"10:10", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"09:40", "arrivalTime":"11:37", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"12:10", "arrivalTime":"14:07", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"12:25", "arrivalTime":"13:30", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"14:15", "arrivalTime":"16:12", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"15:30", "arrivalTime":"17:27", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"16:35", "arrivalTime":"18:32", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"16:45", "arrivalTime":"17:50", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"18:00", "arrivalTime":"19:57", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"20:10", "arrivalTime":"22:07", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400}
               ]},
-              "inbound": { "from": "松山観光港", "to": "呉", "schedule": [] }
+              "inbound": { "from": "呉", "to": "松山観光港", "schedule": [
+                {"time":"07:30", "arrivalTime":"09:27", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"08:50", "arrivalTime":"10:47", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"09:30", "arrivalTime":"10:35", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"10:00", "arrivalTime":"11:57", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"12:05", "arrivalTime":"14:02", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"12:50", "arrivalTime":"13:55", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"13:20", "arrivalTime":"15:17", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"14:25", "arrivalTime":"16:22", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"15:50", "arrivalTime":"17:47", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"17:10", "arrivalTime":"18:15", "type":"リニアジェット", "fare":5800, "childFare":2900, "studentFare":4640},
+                {"time":"18:00", "arrivalTime":"19:57", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400},
+                {"time":"20:15", "arrivalTime":"22:12", "type":"クルーズフェリー", "fare":3000, "childFare":1500, "studentFare":2400}
+              ]}
+            },
+            "hiroshima_kure": {
+              "outbound": { "from": "広島", "to": "呉", "schedule": [
+                {"time":"06:45", "arrivalTime":"07:30", "type":"クルーズフェリー"},
+                {"time":"08:05", "arrivalTime":"08:50", "type":"クルーズフェリー"},
+                {"time":"09:05", "arrivalTime":"09:30", "type":"リニアジェット"},
+                {"time":"09:15", "arrivalTime":"10:00", "type":"クルーズフェリー"},
+                {"time":"11:20", "arrivalTime":"12:05", "type":"クルーズフェリー"},
+                {"time":"12:25", "arrivalTime":"12:50", "type":"リニアジェット"},
+                {"time":"12:35", "arrivalTime":"13:20", "type":"クルーズフェリー"},
+                {"time":"13:40", "arrivalTime":"14:25", "type":"クルーズフェリー"},
+                {"time":"15:05", "arrivalTime":"15:50", "type":"クルーズフェリー"},
+                {"time":"16:45", "arrivalTime":"17:10", "type":"リニアジェット"},
+                {"time":"17:15", "arrivalTime":"18:00", "type":"クルーズフェリー"},
+                {"time":"19:30", "arrivalTime":"20:15", "type":"クルーズフェリー"}
+              ]},
+              "inbound": { "from": "呉", "to": "広島", "schedule": [
+                {"time":"08:17", "arrivalTime":"09:02", "type":"クルーズフェリー"},
+                {"time":"10:10", "arrivalTime":"10:35", "type":"リニアジェット"},
+                {"time":"10:22", "arrivalTime":"11:07", "type":"クルーズフェリー"},
+                {"time":"11:37", "arrivalTime":"12:22", "type":"クルーズフェリー"},
+                {"time":"13:30", "arrivalTime":"13:55", "type":"リニアジェット"},
+                {"time":"14:07", "arrivalTime":"14:52", "type":"クルーズフェリー"},
+                {"time":"16:12", "arrivalTime":"16:57", "type":"クルーズフェリー"},
+                {"time":"17:27", "arrivalTime":"18:12", "type":"クルーズフェリー"},
+                {"time":"17:50", "arrivalTime":"18:15", "type":"リニアジェット"},
+                {"time":"18:32", "arrivalTime":"19:17", "type":"クルーズフェリー"},
+                {"time":"19:57", "arrivalTime":"20:42", "type":"クルーズフェリー"},
+                {"time":"22:07", "arrivalTime":"22:52", "type":"クルーズフェリー"}
+              ]}
             }
           }
         },
@@ -464,7 +548,9 @@
                       </div>
                     </div>
                     <div className="text-right shrink-0 ml-2">
-                      <div className="text-sm font-bold text-slate-700">¥{schedule.fare?.toLocaleString()}</div>
+                      <div className="text-sm font-bold text-slate-700">
+                        {schedule.fare ? `¥${schedule.fare.toLocaleString()}` : '詳細を確認'}
+                      </div>
                       <div className="text-xs text-blue-500 flex items-center gap-1 justify-end mt-1">詳細 <Info size={12}/></div>
                     </div>
                   </div>
@@ -534,31 +620,32 @@
                       </div>
                     )}
                     
-                    <div className="bg-slate-50 rounded-xl p-4 mt-2 border border-slate-100">
-                      <p className="text-xs font-bold text-slate-400 mb-2 border-b border-slate-200 pb-2">片道 旅客運賃</p>
-                      
-                      {/* 大人運賃 */}
-                      <div className="flex justify-between items-center mb-1">
-                        <span className="text-sm font-bold text-slate-600">大人</span>
-                        <span className="text-lg font-black text-slate-800">¥{selectedSchedule.fare?.toLocaleString()}</span>
+                    {(selectedSchedule.fare || selectedSchedule.childFare || selectedSchedule.studentFare) && (
+                      <div className="bg-slate-50 rounded-xl p-4 mt-2 border border-slate-100">
+                        <p className="text-xs font-bold text-slate-400 mb-2 border-b border-slate-200 pb-2">片道 旅客運賃</p>
+                        
+                        {selectedSchedule.fare && (
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-sm font-bold text-slate-600">大人</span>
+                            <span className="text-lg font-black text-slate-800">¥{selectedSchedule.fare.toLocaleString()}</span>
+                          </div>
+                        )}
+                        
+                        {selectedSchedule.studentFare && (
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-sm font-bold text-slate-600">学割</span>
+                            <span className="text-lg font-black text-slate-800">¥{selectedSchedule.studentFare.toLocaleString()}</span>
+                          </div>
+                        )}
+                        
+                        {selectedSchedule.childFare && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm font-bold text-slate-600">小児</span>
+                            <span className="text-lg font-black text-slate-800">¥{selectedSchedule.childFare.toLocaleString()}</span>
+                          </div>
+                        )}
                       </div>
-                      
-                      {/* 学割運賃 (データが存在する場合のみ表示) */}
-                      {selectedSchedule.studentFare && (
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="text-sm font-bold text-slate-600">学割</span>
-                          <span className="text-lg font-black text-slate-800">¥{selectedSchedule.studentFare.toLocaleString()}</span>
-                        </div>
-                      )}
-                      
-                      {/* 小児運賃 (データが存在する場合のみ表示) */}
-                      {selectedSchedule.childFare && (
-                        <div className="flex justify-between items-center">
-                          <span className="text-sm font-bold text-slate-600">小児</span>
-                          <span className="text-lg font-black text-slate-800">¥{selectedSchedule.childFare.toLocaleString()}</span>
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
                 </div>
                 <div className="bg-slate-50 p-4 text-center border-t border-slate-100">
